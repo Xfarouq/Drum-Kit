@@ -1,9 +1,9 @@
 
 // Makes sound when button is clicked
-var numberOfDrums = document.querySelectorAll(".drum").length
+var numberOfDrums = document.querySelectorAll(".drum");
 
-for (var i = 0; i < numberOfDrums; i++){
-    document.querySelectorAll(".drum")[i].addEventListener("click", function(){
+numberOfDrums.forEach(element => {
+    element.addEventListener("click", function(){
 
         var buttonInnerHtml = this.innerHTML;
 
@@ -11,12 +11,26 @@ for (var i = 0; i < numberOfDrums; i++){
 
         buttonAnimation(buttonInnerHtml);
     });
-}
+});
+
+// var numberOfDrums = document.querySelectorAll(".drum").length;
+// for (var i = 0; i < numberOfDrums; i++){
+//     document.querySelectorAll(".drum")[i].addEventListener("click", function(){
+
+//         var buttonInnerHtml = this.innerHTML;
+
+//         makeSound(buttonInnerHtml);
+
+//         buttonAnimation(buttonInnerHtml);
+//     });
+// }
 
 
 // Makes sound when keyboard is pressed
 document.addEventListener("keydown", function(event){ 
-        makeSound(event.key);    
+        makeSound(event.key);  
+        
+        buttonAnimation(event.key);
 });
 
     
@@ -58,7 +72,13 @@ function makeSound(key){
 
 
 function buttonAnimation(currentKey){
+    var activeButton = document.querySelector("." + currentKey);
 
+    activeButton.classList.add("pressed");
+
+    setTimeout(function(){
+        activeButton.classList.remove("pressed");
+    }, 100);
 }
 
 
